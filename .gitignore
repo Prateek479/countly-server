@@ -12,3 +12,7 @@ plugins/plugins.json
 frontend/express/public/sdk/
 **/.DS_Store
 **/node_modules
+log/*
+nghttp2/
+frontend/express/public/images/*
+bin/config/nginx.default.backup
