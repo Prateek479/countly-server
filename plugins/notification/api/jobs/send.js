@@ -9,7 +9,6 @@ const job = require('../../../../api/parts/jobs/job.js'),
 class NotificationJob extends job.Job {
 
     run(countlyDb, doneJob, progressJob) {
-        console.log('ohh fuck thats actually a job started')
         log.d("starting notification send job");
 
         function ping() {
@@ -20,7 +19,11 @@ class NotificationJob extends job.Job {
             }
         }
         var timeout = setTimeout(ping, 10000);
-
+        // daily crono job for notification 
+        //applicable to is db on which we need to check for condition
+        //constrain is matching condition
+        //date is a different type as is need comparision in terms of days
+        // value is exact value in case of date its no of days 
         const dailyNotification = [{
             'appId': '58fd8fd89c381c1dd19f80b1',
             'applicableTo': 'app_users',
@@ -52,16 +55,16 @@ class NotificationJob extends job.Job {
 
                 if (ob.type === 'date' && ob.constrain !== '$eq') {
                     query[ob.field] = {};
+                    //matching no of days with date time stamp
                     query[ob.field][ob.constrain] = (currentDate - (ob.value * 24 * 60 * 60));
                 }
-
-                console.log('here is query', query)
 
                 countlyDb.collection(db).find(query).toArray(function(err, result) {
                     if (err) {
                         log.d("error sending notifications")
                     } else if (!err && result.length > 0) {
                         result.forEach(function(entity) {
+                            //this can go into event loop if required 
                             console.log('notification sent to user ', entity.uid, ' on app ', ob.appId)
                         });
                         callback();
@@ -71,7 +74,7 @@ class NotificationJob extends job.Job {
 
                 });
             }, function() {
-                console.log('send notification')
+                console.log('Daily notification sent')
                 log.d("all reports sent");
                 clearTimeout(timeout);
                 timeout = 0;

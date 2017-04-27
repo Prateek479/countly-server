@@ -7,7 +7,7 @@ var common = require('../../../api/utils/common.js'),
 
     //Storing data in array of json which can further be stored in mongo collection 
     //write api for real tim enotifications.
-    const coditions = [{
+    const realtimeNotification = [{
         'name': 'user session count reach x',
         'field': 'app_user',
         'value': 8,
@@ -35,10 +35,12 @@ var common = require('../../../api/utils/common.js'),
         'notification_msg': 'Coupen Code "COUNTLY" available on web'
     }];
 
+    //regestring all the wrtie request this can be customize as per notification 
+    //making it genric as of now
+
     plugins.register("/i", function(ob) {
         const param = ob.params
-        console.log('params', param)
-        coditions.forEach(function(cond) {
+        realtimeNotification.forEach(function(cond) {
 
             // not for custom event base notification
             if (cond.field !== 'events') {
@@ -48,7 +50,7 @@ var common = require('../../../api/utils/common.js'),
             }
             //custom event notification
             else if (cond.field === 'events') {
-                console.log('meet ', param.qstring[cond.field])
+
                 if (!cond.isSegment && param.qstring && param.qstring[cond.field] && param.qstring[cond.field][cond.path] === cond.value) {
                     console.log('notify user for this event', cond.notification_msg);
                 } else if (cond.isSegment && param.qstring && param.qstring[cond.segment.field] && param.qstring[cond.segment.field][cond.segment.path] === cond.segment.value) {
@@ -59,7 +61,6 @@ var common = require('../../../api/utils/common.js'),
     });
 
     // notificaiton system for daily notifications
-
     plugins.register("/master", function(ob) {
         // Allow configs to load & scanner to find all jobs classes
         setTimeout(() => {
