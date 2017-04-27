@@ -6,11 +6,15 @@ var common = require('../../../api/utils/common.js'),
 (function(plugins) {
 
     //Storing data in array of json which can further be stored in mongo collection 
-    //write api for real tim enotifications.
+    //write api for real time notifications.
     const realtimeNotification = [{
+        //redable name 
         'name': 'user session count reach x',
+        //params field
         'field': 'app_user',
+        //value to be matched
         'value': 8,
+        //sub field
         'path': 'sc',
         'notification_msg': 'You just got luck on your x visit..!'
     }, {
@@ -54,6 +58,7 @@ var common = require('../../../api/utils/common.js'),
                 if (!cond.isSegment && param.qstring && param.qstring[cond.field] && param.qstring[cond.field][cond.path] === cond.value) {
                     console.log('notify user for this event', cond.notification_msg);
                 } else if (cond.isSegment && param.qstring && param.qstring[cond.segment.field] && param.qstring[cond.segment.field][cond.segment.path] === cond.segment.value) {
+                    //can handle it for the segment field
                     console.log('notify user for segment event', cond.notification_msg);
                 }
             }

@@ -46,7 +46,7 @@ class NotificationJob extends job.Job {
         plugins.loadConfigs(countlyDb, function() {
 
             let currentDate = Math.round(Date.now() / 1000);
-
+            //callback when all the notification are done and sent
             async.eachSeries(dailyNotification, function(ob, callback) {
                 let db = ob.applicableTo + ob.appId,
                     query = {};
@@ -74,6 +74,7 @@ class NotificationJob extends job.Job {
 
                 });
             }, function() {
+                //task complete
                 console.log('Daily notification sent')
                 log.d("all reports sent");
                 clearTimeout(timeout);
