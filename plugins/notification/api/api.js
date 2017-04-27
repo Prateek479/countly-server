@@ -7,38 +7,7 @@ var common = require('../../../api/utils/common.js'),
 
     //Storing data in array of json which can further be stored in mongo collection 
     //write api for real time notifications.
-    const realtimeNotification = [{
-        //redable name 
-        'name': 'user session count reach x',
-        //params field
-        'field': 'app_user',
-        //value to be matched
-        'value': 8,
-        //sub field
-        'path': 'sc',
-        'notification_msg': 'You just got luck on your x visit..!'
-    }, {
-        'name': 'notify if platform is web',
-        'field': 'app',
-        'value': 'web',
-        'path': 'type',
-        'notification_msg': 'Coupen Code "COUNTLY" available on web'
-    }, {
-        'name': 'Evenet base notification',
-        'field': 'events',
-        'value': 1,
-        'path': 'sum',
-        // if true check the segments condition
-        'isSegment': false,
-        'segment': {
-            // there could be multiple condition based on segment comes under this
-            'field': '',
-            'value': '',
-            'path': ''
-        },
-        'notification_msg': 'Coupen Code "COUNTLY" available on web'
-    }];
-
+    const realtimeNotification = require('./config/realtimenotification');
     //regestring all the wrtie request this can be customize as per notification 
     //making it genric as of now
 
@@ -54,8 +23,8 @@ var common = require('../../../api/utils/common.js'),
             }
             //custom event notification
             else if (cond.field === 'events') {
-
-                if (!cond.isSegment && param.qstring && param.qstring[cond.field] && param.qstring[cond.field][cond.path] === cond.value) {
+                //assumin that event is array of single element             
+                if (!cond.isSegment && param.qstring && param.qstring[cond.field] && param.qstring[cond.field][0][cond.path] === cond.value) {
                     console.log('notify user for this event', cond.notification_msg);
                 } else if (cond.isSegment && param.qstring && param.qstring[cond.segment.field] && param.qstring[cond.segment.field][cond.segment.path] === cond.segment.value) {
                     //can handle it for the segment field
