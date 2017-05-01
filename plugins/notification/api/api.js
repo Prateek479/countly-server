@@ -8,9 +8,8 @@ var common = require('../../../api/utils/common.js'),
     //Storing data in array of json which can further be stored in mongo collection 
     //write api for real time notifications.
     const realtimeNotification = require('./config/realtimenotification');
-    //regestring all the wrtie request this can be customize as per notification 
-    //making it genric as of now
-
+    //regestring all the wrtie request this can be customize as per notification     
+    //making it genric for all request coming from sdk 
     plugins.register("/i", function(ob) {
         const param = ob.params
         realtimeNotification.forEach(function(cond) {
@@ -41,6 +40,16 @@ var common = require('../../../api/utils/common.js'),
             require('../../../api/parts/jobs').job('notification:send').replace().schedule('every 1 day');
         }, 10000);
     });
+
+    plugins.register("/save/notification", function(ob) {
+        console.log('here', ob);
+        // Allow configs to load & scanner to find all jobs classes
+        // setTimeout(() => {
+        //     require('../../../api/parts/jobs').job('notification:send').replace().schedule('every 1 day');
+        // }, 10000);
+    });
+
+
 
 }(plugins));
 
