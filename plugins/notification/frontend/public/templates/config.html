@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Create Notification </title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<style type="text/css">
+    .bs-example{
+    	margin: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="bs-example">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Create Notification</h3>
+        </div>
+        <div class="panel-body">
+<form class="form-horizontal" action="/save/notification" method="post">
+<fieldset>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="name">Name </label>  
+  <div class="col-md-4">
+  <input id="name" name="name" type="text" placeholder="Name" class="form-control input-md">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="notification_msg">Notification Message</label>  
+  <div class="col-md-4">
+  <input id="notification_msg" name="notification_msg" type="text" placeholder="Notification Message" class="form-control input-md">
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="applicableTo">Select Entity</label>
+  <div class="col-md-4">
+    <select id="applicableTo" name="applicableTo" class="form-control">
+      <option value="app_users">Users</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="field">Field</label>
+  <div class="col-md-4">
+    <select id="field" name="field" class="form-control">
+      <option value="scc">Session Count</option>
+      <option value="ls">Last Login</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="type">Field Type</label>
+  <div class="col-md-4">
+    <select id="type" name="type" class="form-control">
+      <option value="variable">String/Integer</option>
+      <option value="date">Date</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="constrain">Constrain</label>
+  <div class="col-md-4">
+    <select id="constrain" name="constrain" class="form-control">
+      <option value="$eq"> = </option>
+      <option value="$lte"> <= </option>
+ 	  <option value="$gte"> >= </option>
+   
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="value">Value</label>  
+  <div class="col-md-4">
+  <input id="value" name="value" type="text" placeholder="Value" class="form-control input-md">
+  </div>
+</div>
+</fieldset>
+<div class="form-group">
+  <label class="col-md-4 control-label" for="value"></label>  
+  <div class="col-md-4">
+	<button type="submit" class="btn btn-success">Create Notification</button>
+  </div>
+</div>
+
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>                                		
